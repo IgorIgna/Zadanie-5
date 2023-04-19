@@ -1,9 +1,5 @@
 <?php
-$server='localhost';
-$user='root';
-$pass='';
-$datab='users';
-$db = new mysqli($server, $user, $pass, $datab);
+$db = new mysqli('localhost', 'root', '', 'users');
 
 if($db->connect_error) {
     die("Błąd połączenia: ". $db->connect_error); 
