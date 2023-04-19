@@ -4,17 +4,15 @@ include 'config.php';
 if(!empty($_POST['Submit'])){
     $pass=hash('md5', $_POST['password']);
 
-    $p = $q->prepare("SELECT username, password FROM users WHERE username=? AND password=?");
-    $p->bind_param('ss', $_GET['username'], $_GET['password']);
+    $p = $db->prepare("SELECT username, password FROM users WHERE username=? AND password=?");
+    $p->bind_param('ss', $_POST['username'], $_POST['password']);
 
     $p->execute();
     $p->store_result();
     if($p->num_rows>0) {
         session_start();
-        $_SESSION['username'] = $_GET['username'];
+        $_SESSION['username'] = $_POST['username'];
         $_SESSION['logged'] = TRUE;
-        $_SESSION['first_name'] = "Włodzimierz";
-        $_SESSION['last_name'] = "Kowalski";
         header("location: index.php");
     }
     else {
